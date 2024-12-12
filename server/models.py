@@ -38,6 +38,24 @@ class Task(Base):
     __table_args__ = (
         CheckConstraint('priority >=1 AND priority <=3', name="check_priority_range"),
     )
+    
+    def to_dict(self) -> dict:
+        """
+        Returns the task as a dictionary.
+
+        Returns:
+            A dictionary representation of the task.
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "due_date": self.due_date.isoformat() if self.due_date else None,
+            "priority": self.priority,
+            "completed": self.completed,
+            "parent_task_id": self.parent_task_id,
+            "project_id": self.project_id,
+            "subtasks": [subtask.to_dict() for subtask in self.subtasks],  # List of subtask IDs
+        }
 
 
 class Project(Base):
@@ -54,4 +72,17 @@ class Project(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True, nullable=False)
 
-    tasks: Mapped[List["Task"]] = relationship("Task", back_populates="project")
+    tasks: Mapped[List["Task"]] = relationship("Task", back_populates="project", cascade="all, delete-orphan")
+
+    def to_dict(self) -> dict:
+        """
+        Returns the project as a dictionary.
+
+        Returns:
+            dict: A dictionary representation of the project.
+        """
+        return {
+            "id": self.id,
+            "name": self.name,
+            "tasks": [task.to_dict() for task in self.tasks],
+        }

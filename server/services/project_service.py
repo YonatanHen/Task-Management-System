@@ -31,7 +31,7 @@ def create_project(name: str) -> dict:
     session.add(new_project)
     session.commit() 
     
-    res = { "id": new_project.id, "name": new_project.name, "tasks": new_project.tasks }
+    res = new_project.to_dict()
     
     session.close()
     
@@ -58,7 +58,7 @@ def get_project(id: int) -> dict:
     
     project = session.query(Project).filter_by(id=id).first()
     
-    res = { "id": project.id, "name": project.name, "tasks": project.tasks }       
+    res = project.to_dict()    
     session.close()
     
     return res
@@ -84,7 +84,7 @@ def delete_project(id: int) -> dict:
     
     project = session.query(Project).filter_by(id=id).first()
     
-    res = { "id": project.id, "name": project.name, "tasks": project.tasks }  
+    res = project.to_dict() 
     
     session.delete(project)     
     session.commit()
