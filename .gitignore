@@ -2,3 +2,4 @@ server/Lib
 server/pyvenv.cfg
 server/Scripts
 server/Include
+server/.env
