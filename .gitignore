@@ -4,3 +4,4 @@ server/Scripts
 server/Include
 server/.env
 *__pycache__*
+*.pyc

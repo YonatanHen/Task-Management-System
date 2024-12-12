@@ -15,31 +15,27 @@ def create_project(name: str) -> dict:
     Returns:
         dict: a dictionary representing the newly created project.
     """
-    try:
-        if not name or len(name.strip()) == 0:
-            raise KeyError
-        
-        session = get_db_session()
-        
-        project_name = session.query(Project).filter_by(name=name).first()
-        
-        if project_name is not None:
-            session.close()
-            raise ValueError(f"Project {name} already exists.")
-        
-        new_project = Project(name=name)
-        
-        session.add(new_project)
-        session.commit() 
-        
-        res = { "id": new_project.id, "name": new_project.name, "tasks": new_project.tasks }
-        
+    if not name or len(name.strip()) == 0:
+        raise KeyError("Name is not provided or invalid.")
+    
+    session = get_db_session()
+    
+    project_name = session.query(Project).filter_by(name=name).first()
+    
+    if project_name is not None:
         session.close()
-        
-        return res
-        
-    except Exception as e:
-        pass
+        raise ValueError(f"Project '{name}' already exists.")
+    
+    new_project = Project(name=name)
+    
+    session.add(new_project)
+    session.commit() 
+    
+    res = { "id": new_project.id, "name": new_project.name, "tasks": new_project.tasks }
+    
+    session.close()
+    
+    return res
     
     
 def get_project(id: int) -> dict:
@@ -50,26 +46,52 @@ def get_project(id: int) -> dict:
         id (int): project's ID.
 
     Raises:
-        KeyError: _description_
+        KeyError: raised when ID is not provided.
 
     Returns:
         dict: a dictionary representing the the requested project.
     """
-    try:
-        if not id:
-            raise KeyError
-        
-        session = get_db_session()
-        
-        project = session.query(Project).filter_by(id=id).first()
-        
-        res = { "id": project.id, "name": project.name, "tasks": project.tasks }       
-        session.close()
-        
-        return res
-        
-    except Exception as e:
-        pass
+    if not id:
+        raise KeyError("ID is not provided.")
+    
+    session = get_db_session()
+    
+    project = session.query(Project).filter_by(id=id).first()
+    
+    res = { "id": project.id, "name": project.name, "tasks": project.tasks }       
+    session.close()
+    
+    return res
+
+    
+def delete_project(id: int) -> dict:
+    """
+    This function deletes a project from the DB.
+
+    Args:
+        id (int): project's ID.
+
+    Raises:
+        KeyError: raised when ID is not provided.
+
+    Returns:
+        dict: The deleted project's object.
+    """
+    if not id:
+        raise KeyError("ID is not provided.")
+    
+    session = get_db_session()
+    
+    project = session.query(Project).filter_by(id=id).first()
+    
+    res = { "id": project.id, "name": project.name, "tasks": project.tasks }  
+    
+    session.delete(project)     
+    session.commit()
+    
+    session.close()
+    
+    return res
     
     
     

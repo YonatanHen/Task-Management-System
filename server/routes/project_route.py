@@ -7,25 +7,39 @@ project_bp = Blueprint('project', __name__, url_prefix='/project')
 
 @project_bp.route('/', methods=['POST'])
 def create_project_api():
-    if request.method == "POST":
-        try:
+    try:
+        if request.method == "POST":
             payload = request.get_json()
             project_name = payload.get('name')
             
             project = create_project(project_name)
             
             return jsonify({ "message": "Project added successfully", "project": project })
-        except Exception as e:
-            pass
+            
+    except KeyError as e:
+        return str(e), 400
+    except ValueError as e:
+        return str(e), 409
+    except SQLAlchemyError as e:
+        return str(e), e.code
+    except Exception as e:
+        return str(e), 500
+    
         
 @project_bp.route('/<int:id>', methods=['GET', 'DELETE'])
 def get_delete_project_api(id):
-    if request.method == "GET":
-        try:
-            project = get_project(id)
+    try:
+        if request.method == "GET":
+            project = get_project(id)                        
+        elif request.method == "DELETE":
+            project = delete_project(id)
             
-            print(project)
-                        
-            return jsonify(project)
-        except Exception as e:
-            pass
+        return jsonify(project)
+    
+    except KeyError as e:
+        return str(e), 400
+    except SQLAlchemyError as e:
+        return str(e), e.code
+    except Exception as e:
+        return str(e), 500
+          
