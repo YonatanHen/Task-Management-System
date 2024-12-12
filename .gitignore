@@ -3,3 +3,4 @@ server/pyvenv.cfg
 server/Scripts
 server/Include
 server/.env
+*__pycache__*

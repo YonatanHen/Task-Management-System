@@ -1,13 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask
 from flask_cors import CORS
-import sys
-import os
 
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from routes.project_route import project_bp
 
-app = Flask("Task Management System")
-app = Flask(__name__.split('.')[0])
+app = Flask(__name__)
 CORS(app)
+
+app.register_blueprint(project_bp)
 
 @app.route('/')
 def index_api():
