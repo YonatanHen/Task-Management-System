@@ -1,4 +1,5 @@
 import React from "react";
+import { priorities, prioritiesColors } from "../constants/priorities";
 
 const TasksList = ({ tasks, onTaskUpdate }) => {
     const markCompleted = (taskId) => {
@@ -35,11 +36,11 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                 {tasks.map((task) => (
                     <tr key={task.id}>
                         <td>{task.name}</td>
-                        <td>{task.priority}</td>
-                        <td>{task.completed ? "Yes" : "No"}</td>
+                        <td style={{background: prioritiesColors[task.priority]}}>{priorities[task.priority]}</td>
+                        <td>{task.completed ? "V" : "X"}</td>
                         <td>
                             {!task.completed && (
-                                <button onClick={() => markCompleted(task.id)}>Complete</button>
+                                <button onClick={() => markCompleted(task.id)}>Mark {task.completed ? "Uncompleted" : "Completed"}</button>
                             )}
                             <button onClick={() => deleteTask(task.id)}>Delete</button>
                         </td>

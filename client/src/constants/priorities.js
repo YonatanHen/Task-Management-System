@@ -1,5 +1,11 @@
 export const priorities = {
-    High: 3,
-    Medium: 2,
-    Low: 1
+    3: "High",
+    2: "Medium",
+    1: "Low"
+}
+
+export const prioritiesColors = {
+    3: "red",
+    2: "yellow",
+    1: "green"
 }

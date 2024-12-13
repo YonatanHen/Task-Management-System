@@ -27,9 +27,7 @@ def create_task(name: str, due_date: date, priority: int, pid: int, tid: int) ->
     if not due_date:
         raise KeyError("Date is not provided.")
     
-    print(due_date)
     due_date = datetime.strptime(due_date, DATE_FORMAT).date()
-    print(due_date)
         
     if not isinstance(due_date, date):
         raise TypeError("due_date provided incorrectly, please check your input again.")

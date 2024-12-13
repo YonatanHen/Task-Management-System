@@ -54,7 +54,7 @@ const AddTaskModal = ({ project, onAdd }) => {
                 onChange={(e) => setPriority(Number(e.target.value))}
             >
                 {Object.entries(priorities).map(([key, value]) => (
-                    <option key={key} value={value} onSelect={() => setPriority(value)}>{key}</option>
+                    <option key={value} value={key} onSelect={() => setPriority(key)}>{value}</option>
                 ))}
             </select>
             <input
