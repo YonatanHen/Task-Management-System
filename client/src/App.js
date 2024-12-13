@@ -4,27 +4,40 @@ import ProjectsList from "./components/ProjectsList";
 import AddProjectModal from "./components/AddProjectModal";
 import TasksList from "./components/TasksList";
 import AddTaskModal from "./components/AddTaskModal";
+import Pagination from "./components/Pagination";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalProjects, setTotalProjects] = useState(0);
+  const pageSize = 10;
 
   // Fetch projects
   useEffect(() => {
-    fetch("http://localhost:5000/project")
+    fetch(`http://localhost:5000/project?page=${currentPage}&page_size=${pageSize}`)
       .then((res) => res.json())
-      .then(setProjects);
-  }, []);
+      .then(data => {
+        setProjects(data)
+        setTotalProjects(data.length)
+      });
+  }, [currentPage]);
 
   // Fetch tasks for the selected project
   useEffect(() => {
     if (selectedProject) {
       fetch(`http://localhost:5000/project/${selectedProject}/task`)
         .then((res) => res.json())
-        .then(setTasks);
+        .then(data => {
+          setTasks(data.tasks)
+        });
     }
   }, [selectedProject]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <Router>
@@ -40,6 +53,12 @@ const App = () => {
                 <ProjectsList
                   projects={projects}
                   onSelectProject={(id) => setSelectedProject(id)}
+                />
+                <Pagination
+                  currentPage={currentPage}
+                  totalItems={totalProjects}
+                  pageSize={pageSize}
+                  onPageChange={handlePageChange}
                 />
               </div>
             }
