@@ -1,6 +1,31 @@
 from utils.create_session import get_db_session
 from models import Project
 
+def get_projects(page: int, page_size: int) -> list:
+    """
+    Get list of projects by pagination.
+
+    Args:
+        page (int): The page selected by the user (from the UI)
+        page_size (int): The size of the page we fetch.
+
+    Returns:
+        list: list with a size of the page_size that exists in the given page.
+    """
+    
+    session = get_db_session()
+    
+    offset = (page-1) * page_size
+    
+    projects = session.query(Project).offset(offset).limit(page_size)
+    
+    res = [project.to_dict() for project in projects]
+
+    session.close()
+    
+    return res
+
+
 def create_project(name: str) -> dict:
     """
     This function creates a new Project in the DB.

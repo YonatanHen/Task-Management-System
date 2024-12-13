@@ -5,9 +5,15 @@ from services.project_service import *
 
 project_bp = Blueprint('project', __name__, url_prefix='/project')
 
-@project_bp.route('/', methods=['POST'])
-def create_project_api():
+@project_bp.route('/', methods=['GET','POST'])
+def create_project_get_projects_api():
     try:
+        if request.method == "GET""
+            page_number = int(request.args.get('page',1))
+            page_size = int(request.args.get('page_size', 10))
+            
+            projects = get_projects(page_number, page_size)
+            
         if request.method == "POST":
             payload = request.get_json()
             project_name = payload.get('name')
