@@ -12,7 +12,6 @@ def get_projects(page: int, page_size: int) -> list:
     Returns:
         list: list with a size of the page_size that exists in the given page.
     """
-    
     session = get_db_session()
     
     offset = (page-1) * page_size
