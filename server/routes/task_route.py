@@ -35,12 +35,28 @@ def create_task_api():
 def get_delete_task_api(id):
     try:
         if request.method == "GET":
-            project = get_task(id)                        
-        elif request.method == "DELETE":
-            project = delete_task(id)
+            task = get_task(id)                        
+        elif task.method == "DELETE":
+            task = delete_task(id)
             
-        return jsonify(project)
+        return jsonify(task)
     
+    except KeyError as e:
+        return str(e), 400
+    except SQLAlchemyError as e:
+        return str(e), e.code
+    except Exception as e:
+        return str(e), 500
+    
+    
+task_bp.route('/change-status/<int:id>', methods=['GET'])
+def change_task_status_api(id):
+    try:
+        if request.method == "GET":
+            task = change_task_status(id)
+            
+        return jsonify(task)
+                
     except KeyError as e:
         return str(e), 400
     except SQLAlchemyError as e:

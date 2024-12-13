@@ -84,6 +84,18 @@ def get_task(id: int) -> dict:
     return res
 
 def delete_task(id: int) -> dict:
+    """
+    Delete task by it's ID.
+
+    Args:
+        id (int): the ID of the task.
+
+    Raises:
+        KeyError: if the task ID not provided.
+
+    Returns:
+        dict: a dictionary object that representing the deleted task.
+    """
     if not id:
         raise KeyError("ID is not provided.")
     
@@ -99,3 +111,34 @@ def delete_task(id: int) -> dict:
     session.close()
     
     return res
+
+
+def change_task_status(id:int) -> dict:
+    """
+    Mark tasks as completed or uncompleted, based on the current status of the task.
+
+    Args:
+        id (int): the ID of the task.
+
+    Raises:
+        KeyError: if the task ID not provided.
+
+    Returns:
+        dict: a dictionary object that representing the modified task.
+    """
+    if not id:
+        raise KeyError("ID is not provided.")
+
+    session = get_db_session()
+    
+    task = session.query(Task).filter_by(id=id).first()
+    
+    task.completed = not task.completed
+    session.commit()
+    
+    res = task.to_dict()
+      
+    session.close()
+    
+    return res
+    
