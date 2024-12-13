@@ -27,7 +27,7 @@ const App = () => {
   // Fetch tasks for the selected project
   useEffect(() => {
     if (selectedProject) {
-      fetch(`http://localhost:5000/project/${selectedProject}/task`)
+      fetch(`http://localhost:5000/project/${selectedProject.id}`)
         .then((res) => res.json())
         .then(data => {
           setTasks(data.tasks)
@@ -41,7 +41,7 @@ const App = () => {
 
   return (
     <Router>
-      <div>
+      <div id="App">
         <h1>Task Manager</h1>
         <Routes>
           {/* Projects Page */}
@@ -71,9 +71,9 @@ const App = () => {
               <div>
                 {selectedProject && (
                   <>
-                    <h2>Tasks for Project {selectedProject}</h2>
+                    <h2>Tasks for Project "{selectedProject.name}"</h2>
                     <AddTaskModal
-                      projectId={selectedProject}
+                      project={selectedProject}
                       onAdd={(newTask) => setTasks([...tasks, newTask])}
                     />
                     <TasksList

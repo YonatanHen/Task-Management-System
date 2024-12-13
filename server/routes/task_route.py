@@ -19,7 +19,7 @@ def create_task_api():
             
             task = create_task(task_name, due_date, priority, pid, tid)
             
-            return jsonify({ "message": "Project added successfully", "task": task })
+            return jsonify({ "message": "Task added successfully", "task": task })
             
     except KeyError as e:
         return str(e), 400

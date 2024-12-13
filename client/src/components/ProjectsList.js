@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProjectsList = ({ projects }) => {
+const ProjectsList = ({ projects, onSelectProject }) => {
     return (
         <table>
             <thead>
@@ -15,7 +15,7 @@ const ProjectsList = ({ projects }) => {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>
-                            <Link to={`/projects/${project.id}`}>View Tasks</Link>
+                            <Link to={`/projects/${project.id}`} onSelect={onSelectProject(project)}>View Tasks</Link>
                         </td>
                     </tr>
                 ))}
