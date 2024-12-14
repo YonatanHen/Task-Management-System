@@ -2,6 +2,7 @@ from utils.create_session import get_db_session
 from models import Task, Project
 from datetime import datetime, date
 from utils.constants import DATE_FORMAT
+from utils.send_email import send_email
 
 
 def create_task(name: str, due_date: date, priority: int, pid: int, tid: int) -> dict:
@@ -55,6 +56,9 @@ def create_task(name: str, due_date: date, priority: int, pid: int, tid: int) ->
     res = new_task.to_dict()
     
     session.close()
+    
+    # Bonus: send email once a new task is added
+    send_email(new_task.name)
     
     return res
 
