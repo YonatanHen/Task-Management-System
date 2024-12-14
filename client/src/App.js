@@ -5,6 +5,7 @@ import AddProjectModal from "./components/AddProjectModal";
 import TasksList from "./components/TasksList";
 import AddTaskModal from "./components/AddTaskModal";
 import Pagination from "./components/Pagination";
+import FindProjectModal from "./components/FindProjectModal";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
@@ -16,7 +17,7 @@ const App = () => {
 
   // Fetch projects
   useEffect(() => {
-    fetch(`http://localhost:5000/project?page=${currentPage}&page_size=${pageSize}`)
+    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}`)
       .then((res) => res.json())
       .then(data => {
         setProjects(data)
@@ -27,7 +28,7 @@ const App = () => {
   // Fetch tasks for the selected project
   useEffect(() => {
     if (selectedProject) {
-      fetch(`http://localhost:5000/project/${selectedProject.id}`)
+      fetch(`${HOST}/project/${selectedProject.id}`)
         .then((res) => res.json())
         .then(data => {
           setTasks(data.tasks)
@@ -49,11 +50,12 @@ const App = () => {
             path="/"
             element={
               <div>
-                <AddProjectModal onAdd={(newProject) => setProjects([...projects, newProject])} />
+                <FindProjectModal setProjects={setProjects} />
                 <ProjectsList
                   projects={projects}
                   onSelectProject={(id) => setSelectedProject(id)}
                 />
+                <AddProjectModal onAdd={(newProject) => setProjects([...projects, newProject])} />
                 <Pagination
                   currentPage={currentPage}
                   totalItems={totalProjects}

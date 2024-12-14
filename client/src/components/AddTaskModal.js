@@ -16,7 +16,7 @@ const AddTaskModal = ({ project, onAdd }) => {
 
         try {
             const response = await axios.post(
-                "http://localhost:5000/task/",
+                "${HOST}/task/",
                 {
                     name: taskName,
                     priority,

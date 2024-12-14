@@ -5,7 +5,7 @@ import { priorities, prioritiesColors } from "../constants/priorities";
 const TasksList = ({ tasks, onTaskUpdate }) => {
     const markCompleted = async (taskId) => {
         try {
-            const response = await axios.patch(`http://localhost:5000/task/${taskId}`,
+            const response = await axios.patch(`${HOST}/task/${taskId}`,
                 { completed: true },
                 { "Content-Type": "application/json" }
             );
@@ -22,7 +22,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
 
     const deleteTask = async (taskId) => {
         try {
-            await axios.delete(`http://localhost:5000/task/${taskId}`)
+            await axios.delete(`${HOST}/task/${taskId}`)
             onTaskUpdate((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
         } catch (error) {
             alert(error.message);
