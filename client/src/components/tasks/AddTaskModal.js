@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { priorities } from "../constants/priorities";
-import { HOST } from "../constants/host";
+import { priorities } from "../../constants/priorities";
+import { HOST } from "../../constants/host";
 
 const AddTaskModal = ({ project, onAdd }) => {
     const todayDate = new Date().toISOString().split("T")[0]

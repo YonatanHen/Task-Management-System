@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProjectsList from "./components/ProjectsList";
-import AddProjectModal from "./components/AddProjectModal";
-import TasksList from "./components/TasksList";
-import AddTaskModal from "./components/AddTaskModal";
-import Pagination from "./components/Pagination";
-import FindProjectModal from "./components/FindProjectModal";
+import ProjectsList from "./components/projects/ProjectsList";
+import AddProjectModal from "./components/projects/AddProjectModal";
+import TasksList from "./components/tasks/TasksList";
+import AddTaskModal from "./components/tasks/AddTaskModal";
+import Pagination from "./components/projects/Pagination";
+import FindProjectModal from "./components/projects/FindProjectModal";
 import { HOST } from "./constants/host";
 
 const App = () => {
