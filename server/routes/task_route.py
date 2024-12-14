@@ -36,9 +36,9 @@ def get_delete_update_task_api(id):
     try:
         if request.method == "GET":
             task = get_task(id)                        
-        elif task.method == "DELETE":
+        elif request.method == "DELETE":
             task = delete_task(id)
-        elif task.method == "PATCH":
+        elif request.method == "PATCH":
             task = change_task_status(id)
 
         return jsonify(task)

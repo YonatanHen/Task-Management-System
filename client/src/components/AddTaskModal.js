@@ -33,9 +33,7 @@ const AddTaskModal = ({ project, onAdd }) => {
             setPriority(priorities.Low);
             setDueDate(new Date().toISOString().split("T")[0]);
         } catch (error) {
-            if (error.response) {
-                console.log(error || "An error occurred.");
-            }
+            alert(error.message)
         }
     };
 

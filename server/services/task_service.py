@@ -104,7 +104,7 @@ def delete_task(id: int) -> dict:
     task = session.query(Task).filter_by(id=id).first()
     
     res = task.to_dict()  
-    
+        
     session.delete(task)
     session.commit()
       
