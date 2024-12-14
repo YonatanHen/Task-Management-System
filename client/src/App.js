@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectsList from "./components/ProjectsList";
 import AddProjectModal from "./components/AddProjectModal";
@@ -6,6 +7,7 @@ import TasksList from "./components/TasksList";
 import AddTaskModal from "./components/AddTaskModal";
 import Pagination from "./components/Pagination";
 import FindProjectModal from "./components/FindProjectModal";
+import { HOST } from "./constants/host";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
@@ -13,11 +15,12 @@ const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProjects, setTotalProjects] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("")
   const pageSize = 10;
 
   // Fetch projects
   useEffect(() => {
-    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}`)
+    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchQuery.length>0 ? `&input=${searchQuery}` : ""}`)
       .then((res) => res.json())
       .then(data => {
         setProjects(data)

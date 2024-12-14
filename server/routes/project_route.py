@@ -11,8 +11,9 @@ def create_project_get_projects_api():
         if request.method == "GET":
             page_number = int(request.args.get('page',1))
             page_size = int(request.args.get('page_size', 10))
-            
-            projects = get_projects(page_number, page_size)
+            search_input = str(request.args.get('input', ""))
+                        
+            projects = get_projects(page_number, page_size, search_input)
             
             return jsonify(projects)
             

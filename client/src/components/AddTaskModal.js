@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { priorities } from "../constants/priorities";
+import { HOST } from "../constants/host";
 
 const AddTaskModal = ({ project, onAdd }) => {
     const todayDate = new Date().toISOString().split("T")[0]
@@ -16,7 +17,7 @@ const AddTaskModal = ({ project, onAdd }) => {
 
         try {
             const response = await axios.post(
-                "${HOST}/task/",
+                `${HOST}/task/`,
                 {
                     name: taskName,
                     priority,

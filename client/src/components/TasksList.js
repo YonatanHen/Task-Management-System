@@ -1,6 +1,7 @@
 import React from "react";
 import axios from 'axios';
 import { priorities, prioritiesColors } from "../constants/priorities";
+import { HOST } from "../constants/host";
 
 const TasksList = ({ tasks, onTaskUpdate }) => {
     const markCompleted = async (taskId) => {
