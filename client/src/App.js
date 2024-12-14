@@ -26,7 +26,7 @@ const App = () => {
         setProjects(data)
         setTotalProjects(data.length)
       });
-  }, [currentPage]);
+  }, [currentPage, searchQuery]);
 
   // Fetch tasks for the selected project
   useEffect(() => {
@@ -53,7 +53,7 @@ const App = () => {
             path="/"
             element={
               <div>
-                <FindProjectModal setProjects={setProjects} />
+                <FindProjectModal setSearchQuery={setSearchQuery} />
                 <ProjectsList
                   projects={projects}
                   onSelectProject={(id) => setSelectedProject(id)}
