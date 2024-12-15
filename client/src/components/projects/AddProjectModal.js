@@ -29,7 +29,7 @@ const AddProjectModal = ({ onAdd }) => {
     };
 
     return (
-        <div>
+        <div style={{ marginTop: 8 }}>
             <input
                 type="text"
                 placeholder="Project Name"

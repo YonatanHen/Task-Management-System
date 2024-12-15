@@ -36,8 +36,6 @@ const ProjectsList = ({ projects, setProjects, onSelectProject, fetchTasks }) =>
                             <button onClick={() => handleSelect(project)}>
                                 View Tasks
                             </button>
-                        </td>
-                        <td>
                             <button onClick={() => deleteProject(project.id)}>
                                 Delete Project
                             </button>

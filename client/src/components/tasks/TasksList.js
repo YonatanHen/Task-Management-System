@@ -48,7 +48,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                         <td style={{ background: prioritiesColors[task.priority] }}>{priorities[task.priority]}</td>
                         <td>{Intl.DateTimeFormat('en-GB').format(new Date(task.due_date))}</td>
                         <td>{task.completed ? "✔️" : "❌"}</td>
-                        <td>
+                        <td id="tasks-actions-buttons">
                             <button onClick={() => markCompleted(task.id)}>Mark {task.completed ? "Uncompleted" : "Completed"}</button>
                             <button onClick={() => deleteTask(task.id)}>Delete</button>
                         </td>

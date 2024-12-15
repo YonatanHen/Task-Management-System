@@ -16,12 +16,39 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+button {
+  cursor: pointer;
+  padding: 10px 15px;
+  font-size: 12px;
+  border: none;
+}
+
 table td, table th {
   text-align: center;
   vertical-align: middle;
 }
 
+table td {
+  padding-left: 20px;
+}
+
+table td button {
+  margin-left: 5px;
+}
+
 #input-items button {
   margin-left: 8px;
   margin-bottom: 8px;
+}
+
+#tasks-actions-buttons {
+  display: flex;
+  align-items: center;
+}
+
+#tasks-actions-buttons button {
+  padding: 10px 15px;
+  font-size: 12px;
+  border: none;
+  width: 150px;
 }
