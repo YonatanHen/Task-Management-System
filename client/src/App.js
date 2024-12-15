@@ -2,12 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import ProjectsList from "./components/projects/ProjectsList";
-import AddProjectModal from "./components/projects/AddProjectModal";
-import TasksList from "./components/tasks/TasksList";
-import AddTaskModal from "./components/tasks/AddTaskModal";
-import Pagination from "./components/projects/Pagination";
-import FindModel from './components/shared/FindModal'
 import { HOST } from "./constants/host";
 import { sortTasks } from "./utils/sortTasks";
 import Tasks from "./components/tasks/Tasks";
