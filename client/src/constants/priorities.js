@@ -7,5 +7,5 @@ export const priorities = {
 export const prioritiesColors = {
     3: "red",
     2: "yellow",
-    1: "green"
+    1: "#56fc77"
 }

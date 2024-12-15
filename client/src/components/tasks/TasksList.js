@@ -35,6 +35,9 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
 
     const updateDependency = async (taskId, parentTaskId) => {
         try {
+            if (parentTaskId === null) {
+                parentTaskId = 'None'
+            }
             const response = await axios.patch(`${HOST}/task/${taskId}`, {
                 parent_task_id: parentTaskId,
             });

@@ -144,8 +144,11 @@ def update_task(id:int, change_status: bool, parent_task_id: int) -> dict:
         task.completed = not task.completed
         
     if parent_task_id:
-        parent_task = session.query(Task).filter_by(id=parent_task_id).first()
-        task.parent_task = parent_task
+        if parent_task_id == 'None':
+            task.parent_task = None
+        else:
+            parent_task = session.query(Task).filter_by(id=parent_task_id).first()
+            task.parent_task = parent_task
     
     session.commit()
     
