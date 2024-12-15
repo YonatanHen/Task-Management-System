@@ -8,7 +8,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - ReactJS
 - Axios
 - React-router-DOM
-- Bootstrap
+- Bootstrap & CSS
 
 #### Backend (Python):
 - Flask
@@ -17,7 +17,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 
 #### DB:
 - PostgreSQL
-* DB running as a container in Docker, over port 5432 (PostgreSQL default)
+> **Note**: DB running as a container in Docker, over port 5432 (PostgreSQL default)
 
 
 ## How to Run the Project  
