@@ -29,7 +29,8 @@ table td, table th {
 }
 
 table td {
-  padding-left: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 table td button {
