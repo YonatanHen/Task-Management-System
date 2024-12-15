@@ -37,15 +37,15 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
    
    ```cd server```
    
-3. (optional) Create a virtual environment:
+2. (optional) Create a virtual environment:
    
    ```python -m venv .```
    
-5. Install dependencies from the requirements.txt file:
-   
-  ```pip install requirements.txt```
+3. Install dependencies from the requirements.txt file:
+
+   ```pip install requirements.txt```
   
-7. Run the Flask server:
+5. Run the Flask server:
    
    ```python app.py```
 
