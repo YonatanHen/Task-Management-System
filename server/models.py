@@ -17,7 +17,7 @@ class Task(Base):
         completed (bool): Indicates if the task is completed. Default is False.
         parent_task_id (Optional[int]): ID of the parent task, if any.
         parent_task (Optional[Task]): Reference to the parent task object.
-        subtasks (List[Task]): List of subtasks associated with this task.
+        dependent_tasks (List[Task]): List of tasks that depend on this task.
         project_id (int): ID of the associated project.
     """
     __tablename__ = "tasks"
@@ -31,7 +31,7 @@ class Task(Base):
     project_id: Mapped[int] = mapped_column(ForeignKey("projects.id"), nullable=False)
 
     parent_task: Mapped[Optional["Task"]] = relationship(
-        "Task", remote_side="Task.id", backref="subtasks"
+        "Task", remote_side="Task.id", backref="dependent_tasks"
     )
     project: Mapped["Project"] = relationship("Project", back_populates="tasks")
     
@@ -54,7 +54,7 @@ class Task(Base):
             "completed": self.completed,
             "parent_task_id": self.parent_task_id,
             "project_id": self.project_id,
-            "subtasks": [subtask.to_dict() for subtask in self.subtasks],  # List of subtask IDs
+            "dependent_tasks": [task.to_dict() for task in self.dependent_tasks],
         }
 
 
