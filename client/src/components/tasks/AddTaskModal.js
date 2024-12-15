@@ -47,7 +47,7 @@ const AddTaskModal = ({ project, onAdd }) => {
                 onChange={(e) => setTaskName(e.target.value)}
                 style={{ marginRight: 5 }}
             />
-            <label style={{ marginRight: 2 }}>Task Priority:</label>
+            <label style={{ marginRight: 8 }}>Task Priority:</label>
             <select
                 value={priority}
                 onChange={(e) => setPriority(Number(e.target.value))}
@@ -56,13 +56,14 @@ const AddTaskModal = ({ project, onAdd }) => {
                     <option key={value} value={key} onSelect={() => setPriority(key)}>{value}</option>
                 ))}
             </select>
+            <label style={{ marginInline: 8 }}>Due Date:</label>
             <input
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
                 placeholder="Due Date"
             />
-            <button onClick={handleSubmit} style={{ marginLeft: 2 }}>Add Task</button>
+            <button onClick={handleSubmit} style={{ marginLeft: 8 }}>Add Task</button>
         </div>
     );
 };

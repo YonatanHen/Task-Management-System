@@ -39,7 +39,12 @@ def get_delete_update_task_api(id):
         elif request.method == "DELETE":
             task = delete_task(id)
         elif request.method == "PATCH":
-            task = change_task_status(id)
+            payload = request.get_json()
+            
+            change_status = payload.get('change_status')
+            parent_task_id = payload.get('parent_task_id')
+            
+            task = update_task(id, change_status, parent_task_id)
 
         return jsonify(task)
     

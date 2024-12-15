@@ -117,12 +117,15 @@ def delete_task(id: int) -> dict:
     return res
 
 
-def change_task_status(id:int) -> dict:
+def update_task(id:int, change_status: bool, parent_task_id: int) -> dict:
     """
-    Mark tasks as completed or uncompleted, based on the current status of the task.
+    Function find task by ID, and updates it based on the rest of the parameters (implemented according to requirements,
+    functionality is scalable)
 
     Args:
         id (int): the ID of the task.
+        completed (bool): boolean indicator which changes task status.
+        parent_task_id (int): the task we want to assign to the updated task.
 
     Raises:
         KeyError: if the task ID not provided.
@@ -137,7 +140,13 @@ def change_task_status(id:int) -> dict:
     
     task = session.query(Task).filter_by(id=id).first()
     
-    task.completed = not task.completed
+    if change_status:
+        task.completed = not task.completed
+        
+    if parent_task_id:
+        parent_task = session.query(Task).filter_by(id=parent_task_id).first()
+        task.parent_task = parent_task
+    
     session.commit()
     
     res = task.to_dict()

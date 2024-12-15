@@ -23,6 +23,13 @@ button {
   border: none;
 }
 
+table th {
+  background-color: lightblue;
+  border-right: white 3px solid;
+  border-left: white 3px solid;
+  padding-inline: 10px;
+}
+
 table td, table th {
   text-align: center;
   vertical-align: middle;
@@ -50,6 +57,5 @@ table td button {
 #tasks-actions-buttons button {
   padding: 10px 15px;
   font-size: 12px;
-  border: none;
   width: 150px;
 }
