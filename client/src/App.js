@@ -58,6 +58,7 @@ const App = () => {
                 <FindProjectModal setSearchQuery={setSearchQuery} />
                 <ProjectsList
                   projects={projects}
+                  setProjects={setProjects}
                   onSelectProject={(project) => setSelectedProject(project)}
                   fetchTasks={fetchTasks}
                 />

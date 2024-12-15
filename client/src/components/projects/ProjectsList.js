@@ -1,12 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { HOST } from "../../constants/host";
 
-const ProjectsList = ({ projects, onSelectProject, fetchTasks }) => {
+const ProjectsList = ({ projects, setProjects, onSelectProject, fetchTasks }) => {
     const navigate = useNavigate();
 
     const handleSelect = async (project) => {
         await onSelectProject(project);
         await fetchTasks(project);
         navigate(`/projects/${project.id}`);
+    };
+
+    const deleteProject = async (projectId) => {
+        try {
+            await axios.delete(`${HOST}/project/${projectId}`)
+            setProjects((prevProjects) => prevProjects.filter((project) => project.id !== projectId));
+        } catch (error) {
+            alert(error.message);
+        }
     };
 
     return (
@@ -24,6 +35,11 @@ const ProjectsList = ({ projects, onSelectProject, fetchTasks }) => {
                         <td>
                             <button onClick={() => handleSelect(project)}>
                                 View Tasks
+                            </button>
+                        </td>
+                        <td>
+                            <button onClick={() => deleteProject(project.id)}>
+                                Delete Project
                             </button>
                         </td>
                     </tr>
