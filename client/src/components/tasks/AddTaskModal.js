@@ -39,10 +39,10 @@ const AddTaskModal = ({ project, onAdd }) => {
     };
 
     return (
-        <div>
+        <div style={{ marginTop: 12 }}>
             <input
                 type="text"
-                placeholder="Enter a New Task"
+                placeholder="Task Name"
                 value={taskName}
                 onChange={(e) => setTaskName(e.target.value)}
                 style={{ marginRight: 5 }}
