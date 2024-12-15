@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
-const FindProjectModal = ({ setSearchQuery }) => {
+const FindModal = ({ setSearchQuery, searchedItem }) => {
     const [input, setInput] = useState("");
 
     const handleSearch = async () => {
         if (!input.trim()) {
-            alert("Please enter a project name to search.");
+            alert(`Please enter a ${searchedItem} name to search.`);
             setSearchQuery("");
             return;
         }
@@ -13,18 +13,23 @@ const FindProjectModal = ({ setSearchQuery }) => {
         setSearchQuery(input)
     };
 
+    const handleReset = () => {
+        setSearchQuery("")
+        setInput("")
+    }
+
     return (
         <div>
             <input
                 type="text"
-                placeholder="Enter project name"
+                placeholder={`Enter ${searchedItem} name`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
             />
             <button onClick={handleSearch}>Search</button>
-            <button onClick={(e) => setSearchQuery("")}>Reset</button>
+            <button onClick={handleReset}>Reset</button>
         </div>
     );
 };
 
-export default FindProjectModal;
+export default FindModal;

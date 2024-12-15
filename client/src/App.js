@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProjectsList from "./components/projects/ProjectsList";
@@ -6,7 +6,7 @@ import AddProjectModal from "./components/projects/AddProjectModal";
 import TasksList from "./components/tasks/TasksList";
 import AddTaskModal from "./components/tasks/AddTaskModal";
 import Pagination from "./components/projects/Pagination";
-import FindProjectModal from "./components/projects/FindProjectModal";
+import FindModel from './components/shared/FindModal'
 import { HOST } from "./constants/host";
 
 const App = () => {
@@ -15,26 +15,41 @@ const App = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProjects, setTotalProjects] = useState(0);
-  const [searchQuery, setSearchQuery] = useState("")
+  const [searchProjectsQuery, setSearchProjectsQuery] = useState("")
+  const [searchTasksQuery, setSearchTaskQuery] = useState("")
   const pageSize = 10;
-
+  const currentTasks = useRef(tasks)
   // Fetch projects
   useEffect(() => {
-    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchQuery.length > 0 ? `&input=${searchQuery}` : ""}`)
+    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchProjectsQuery.length > 0 ? `&input=${searchProjectsQuery}` : ""}`)
       .then((res) => res.json())
       .then(data => {
         setProjects(data)
         setTotalProjects(data.length)
       });
-  }, [currentPage, searchQuery]);
+  }, [currentPage, searchProjectsQuery]);
+
+  useEffect(() => {
+    if (searchTasksQuery.trim() === "") {
+        setTasks(currentTasks.current); 
+    } else {
+        setTasks(
+            currentTasks.current.filter((task) =>
+                task.name.toLowerCase().includes(searchTasksQuery.toLowerCase())
+            )
+        );
+    }
+}, [searchTasksQuery]);
+
 
   // Fetch tasks for the selected project
   const fetchTasks = async (project) => {
-    if (!project) return; 
+    if (!project) return;
     try {
       const response = await axios.get(`${HOST}/project/${project.id}`);
       const tasks = response.data.tasks;
       setTasks(tasks);
+      currentTasks.current = tasks;
     } catch (error) {
       alert("Failed to fetch tasks:", error);
     }
@@ -55,7 +70,7 @@ const App = () => {
             path="/"
             element={
               <div>
-                <FindProjectModal setSearchQuery={setSearchQuery} />
+                <FindModel setSearchQuery={setSearchProjectsQuery} searchedItem="project" />
                 <ProjectsList
                   projects={projects}
                   setProjects={setProjects}
@@ -81,6 +96,7 @@ const App = () => {
                 {selectedProject && (
                   <>
                     <h2>Tasks for Project "{selectedProject.name}"</h2>
+                    <FindModel setSearchQuery={setSearchTaskQuery} searchedItem="task" />
                     <AddTaskModal
                       project={selectedProject}
                       onAdd={(newTask) => setTasks([...tasks, newTask])}
