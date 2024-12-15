@@ -21,17 +21,17 @@ const App = () => {
   const currentTasks = useRef(tasks)
   // Fetch projects
   useEffect(() => {
-    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchProjectsQuery.length > 0 ? `&input=${searchProjectsQuery}` : ""}`)
+    fetch(`${HOST}/project?${searchProjectsQuery.length > 0 ? `input=${searchProjectsQuery}` : ""}`)
       .then((res) => res.json())
       .then(data => {
-        setProjects(data)
-        setTotalProjects(data.length)
+        setProjects(data.slice((currentPage-1)*pageSize, currentPage*pageSize));
+        setTotalProjects(data.length);
       });
   }, [currentPage, searchProjectsQuery]);
 
   useEffect(() => {
     if (searchTasksQuery.trim() === "") {
-        setTasks(currentTasks.current); 
+        setTasks(currentTasks.current);
     } else {
         setTasks(
             currentTasks.current.filter((task) =>

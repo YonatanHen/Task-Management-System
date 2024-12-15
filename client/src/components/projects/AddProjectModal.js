@@ -20,7 +20,11 @@ const AddProjectModal = ({ onAdd }) => {
             const newProject = respone.data
             onAdd(newProject)
         } catch (error) {
-            alert(error);
+            if (error.name === 'AxiosError') {
+                alert(error.response.data)
+            } else {
+                alert(error.message);
+            }
         }
     };
 

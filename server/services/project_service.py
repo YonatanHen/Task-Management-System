@@ -1,13 +1,11 @@
 from utils.create_session import get_db_session
 from models import Project
 
-def get_projects(page: int, page_size: int, name: str) -> list:
+def get_projects(name: str) -> list:
     """
     Get list of projects by pagination.
 
     Args:
-        page (int): The page selected by the user (from the UI)
-        page_size (int): The size of the page we fetch.
         name (str): The text used to query the results by name.
 
     Returns:
@@ -15,15 +13,13 @@ def get_projects(page: int, page_size: int, name: str) -> list:
     """
     session = get_db_session()
     
-    offset = (page-1) * page_size
-    
     query = session.query(Project)
     
     if name:
         query = query.filter(Project.name.ilike(f"%{name}%"))
     
-    projects = query.offset(offset).limit(page_size).all()
-        
+    projects = query.all()
+            
     res = [project.to_dict() for project in projects]
 
     session.close()
