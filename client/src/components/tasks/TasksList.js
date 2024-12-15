@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { priorities, prioritiesColors } from "../../constants/priorities";
 import { HOST } from "../../constants/host";
 
 const TasksList = ({ tasks, onTaskUpdate }) => {
     const [dependencies, setDependencies] = useState({});
+    const [completedTasksCount, setTasksCount] = useState(tasks.filter(task => task.completed).length)
 
     const markCompleted = async (taskId) => {
         try {
@@ -13,6 +14,10 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
             });
 
             const updatedTask = response.data;
+
+            const value = await updatedTask.completed ? 1 : -1;
+
+            setTasksCount(completedTasksCount + value);
 
             onTaskUpdate((prevTasks) =>
                 prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
@@ -116,6 +121,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                     .filter((task) => !task.parent_task_id)
                     .map((task) => renderTaskRow(task))}
             </tbody>
+            <label style={{ fontWeight: "bold", marginTop: 10, fontSize: 20 }}>Completed Tasks: {completedTasksCount}/{tasks.length}</label>
         </table>
     );
 };
