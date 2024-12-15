@@ -35,6 +35,10 @@ table td, table th {
   vertical-align: middle;
 }
 
+#task-name {
+  text-align: left;
+}
+
 table td {
   padding-left: 10px;
   padding-right: 10px;

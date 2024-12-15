@@ -54,7 +54,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
         return (
             <React.Fragment key={task.id}>
                 <tr style={{ paddingLeft: `${level * 20}px` }}>
-                    <td style={{ paddingLeft: `${level * 20}px` }}>{task.name}</td>
+                    <td id="task-name" style={{ paddingLeft: `${level * 20}px` }}>{task.parent_task_id ? "➡️ " + task.name : "🔷 " + task.name}</td>
                     <td style={{ background: prioritiesColors[task.priority] }}>
                         {priorities[task.priority]}
                     </td>
