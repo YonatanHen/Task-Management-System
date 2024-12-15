@@ -14,6 +14,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - Flask
 - SQLAlchemy
 - CORS
+- smtplib
 
 #### DB:
 - PostgreSQL
@@ -28,13 +29,26 @@ Outline how to use the project, interact with its features, or perform specific 
 
 ## Implemented Features  
 ### Core Features  
-- List the core features implemented in the project.  
+- Add projects.
+- Tasks organized per project.
+- Mark tasks as completed.
+- Filter tasks (Find feature) by name (case-insensitive).
+- Tasks include the following properties: name, due date, priority (low/medium/high), completed, parent task reference, and reference to their project.
+- Tasks are organized for each project by their deadline.
 
 ### Bonus Features  
-- List any bonus features that were implemented.  
+- Allow users to mark tasks as dependent on other tasks.
+- The user receives an email once a new task is added.
+- A visual indicator for how many tasks are completed out of the total tasks in the project.
 
 ## Future Improvements  
 Highlight potential enhancements or new features that could be added with more time or resources.  
 
 ## Additional Features (If Implemented)  
-Provide details about any additional features that were implemented beyond the original requirements.  
+- Remove projects.
+- Remove tasks.
+- Mark tasks as uncompleted
+- Pagination in project screen, organized 10 projects per page.
+- Reset search results on the projects page.
+- Filter tasks (Find feature) by name (case-insensitive).
+- Task priorities represented by constant colors: low-green, medium-yellow, high-red.
