@@ -25,28 +25,42 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 #### DB:
 1. Make sure Docker + Docker Desktop installed on your machine.
 2. Create a Docker volume by running the following command:
+   
    ```docker volume create evernetix_task_vol```
-3. Pull and run the Docker PSQL image as follows:
+   
+4. Pull and run the Docker PSQL image as follows:
+   
    ```docker run --name evernetix-task-db -e POSTGRES_USER=<username> -e POSTGRES_PASSWORD=<password> -v evernetix_task_vol:/var/lib/postgresql/data -d -p 5432:5432 postgres```
 
 #### Backend:
 1. Navigate to the server folder:
+   
    ```cd server```
-2. (optional) Create a virtual environment:
+   
+3. (optional) Create a virtual environment:
+   
    ```python -m venv .```
-3. Install dependencies from the requirements.txt file:
+   
+5. Install dependencies from the requirements.txt file:
+   
   ```pip install requirements.txt```
-4. Run the Flask server:
+  
+7. Run the Flask server:
+   
    ```python app.py```
 
 #### Frontend:
 1. Navigate to the client folder:
+   
    ```cd client```
-2. Install client dependencies:
+   
+3. Install client dependencies:
+   
    ```npm i```
-3. Start the client (React) server:
+   
+5. Start the client (React) server:
+   
    ```npm start```
-
 
 ## Instructions  
 Outline how to use the project, interact with its features, or perform specific tasks.  
