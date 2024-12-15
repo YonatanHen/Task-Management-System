@@ -20,3 +20,8 @@ table td, table th {
   text-align: center;
   vertical-align: middle;
 }
+
+#input-items button {
+  margin-left: 8px;
+  margin-bottom: 8px;
+}

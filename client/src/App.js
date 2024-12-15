@@ -19,6 +19,7 @@ const App = () => {
   const [searchTasksQuery, setSearchTaskQuery] = useState("")
   const pageSize = 10;
   const currentTasks = useRef(tasks)
+
   // Fetch projects
   useEffect(() => {
     fetch(`${HOST}/project?${searchProjectsQuery.length > 0 ? `input=${searchProjectsQuery}` : ""}`)
@@ -63,7 +64,6 @@ const App = () => {
   return (
     <Router>
       <div id="App">
-        <h1>Task Manager</h1>
         <Routes>
           {/* Projects Page */}
           <Route

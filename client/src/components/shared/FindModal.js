@@ -19,15 +19,15 @@ const FindModal = ({ setSearchQuery, searchedItem }) => {
     }
 
     return (
-        <div>
+        <div id="input-items">
             <input
                 type="text"
-                placeholder={`Enter ${searchedItem} name`}
+                placeholder={`Search ${searchedItem}`}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
             />
-            <button onClick={handleSearch}>Search</button>
-            <button onClick={handleReset}>Reset</button>
+                <button onClick={handleSearch}>Submit</button>
+                <button onClick={handleReset}>Reset</button>
         </div>
     );
 };
