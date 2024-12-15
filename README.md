@@ -40,6 +40,7 @@ Outline how to use the project, interact with its features, or perform specific 
 - Allow users to mark tasks as dependent on other tasks.
 - The user receives an email once a new task is added.
 - A visual indicator for how many tasks are completed out of the total tasks in the project.
+- Visual connections between tasks are represented in the tasks list.
 
 ## Future Improvements  
 Highlight potential enhancements or new features that could be added with more time or resources.  
@@ -52,3 +53,4 @@ Highlight potential enhancements or new features that could be added with more t
 - Reset search results on the projects page.
 - Filter tasks (Find feature) by name (case-insensitive).
 - Task priorities represented by constant colors: low-green, medium-yellow, high-red.
+- Tasks are sorted by their due date not only on the initial rendering of the tasks page but also where new tasks are added.
