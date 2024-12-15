@@ -31,11 +31,12 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
     };
 
     return (
-        <table>
+        <table style={{ borderSpacing: "20px", width: "100%" }}>
             <thead>
                 <tr>
                     <th>Task Name</th>
                     <th>Priority</th>
+                    <th>Due Date</th>
                     <th>Completed</th>
                     <th>Actions</th>
                 </tr>
@@ -45,7 +46,8 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                     <tr key={task.id}>
                         <td>{task.name}</td>
                         <td style={{ background: prioritiesColors[task.priority] }}>{priorities[task.priority]}</td>
-                        <td>{task.completed ? "V" : "X"}</td>
+                        <td>{Intl.DateTimeFormat('en-GB').format(new Date(task.due_date))}</td>
+                        <td>{task.completed ? "✔️" : "❌"}</td>
                         <td>
                             <button onClick={() => markCompleted(task.id)}>Mark {task.completed ? "Uncompleted" : "Completed"}</button>
                             <button onClick={() => deleteTask(task.id)}>Delete</button>
