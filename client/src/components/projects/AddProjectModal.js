@@ -1,19 +1,27 @@
 import React, { useState } from "react";
+import axios from 'axios';
+import { HOST } from "../../constants/host";
 
 const AddProjectModal = ({ onAdd }) => {
     const [projectName, setProjectName] = useState("");
 
-    const handleSubmit = () => {
-        fetch("${HOST}/project", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: projectName }),
-        })
-            .then((res) => res.json())
-            .then((newProject) => {
-                onAdd(newProject);
-                setProjectName("");
-            });
+    const handleSubmit = async () => {
+        try {
+            const respone = await axios.post(
+                `${HOST}/project/`,
+                {
+                    name: projectName
+                },
+                {
+                    headers: { "Content-Type": "application/json" },
+                }
+            );
+
+            const newProject = respone.data
+            onAdd(newProject)
+        } catch (error) {
+            alert(error);
+        }
     };
 
     return (

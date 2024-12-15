@@ -20,7 +20,7 @@ const App = () => {
 
   // Fetch projects
   useEffect(() => {
-    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchQuery.length>0 ? `&input=${searchQuery}` : ""}`)
+    fetch(`${HOST}/project?page=${currentPage}&page_size=${pageSize}${searchQuery.length > 0 ? `&input=${searchQuery}` : ""}`)
       .then((res) => res.json())
       .then(data => {
         setProjects(data)
@@ -29,15 +29,17 @@ const App = () => {
   }, [currentPage, searchQuery]);
 
   // Fetch tasks for the selected project
-  useEffect(() => {
-    if (selectedProject) {
-      fetch(`${HOST}/project/${selectedProject.id}`)
-        .then((res) => res.json())
-        .then(data => {
-          setTasks(data.tasks)
-        });
+  const fetchTasks = async (project) => {
+    if (!project) return; 
+    try {
+      const response = await axios.get(`${HOST}/project/${project.id}`);
+      const tasks = response.data.tasks;
+      setTasks(tasks);
+    } catch (error) {
+      alert("Failed to fetch tasks:", error);
     }
-  }, [selectedProject]);
+  };
+
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -56,7 +58,8 @@ const App = () => {
                 <FindProjectModal setSearchQuery={setSearchQuery} />
                 <ProjectsList
                   projects={projects}
-                  onSelectProject={(id) => setSelectedProject(id)}
+                  onSelectProject={(project) => setSelectedProject(project)}
+                  fetchTasks={fetchTasks}
                 />
                 <AddProjectModal onAdd={(newProject) => setProjects([...projects, newProject])} />
                 <Pagination

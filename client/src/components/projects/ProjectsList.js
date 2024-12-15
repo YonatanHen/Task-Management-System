@@ -1,7 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ProjectsList = ({ projects, onSelectProject }) => {
+const ProjectsList = ({ projects, onSelectProject, fetchTasks }) => {
+    const navigate = useNavigate();
+
+    const handleSelect = async (project) => {
+        await onSelectProject(project);
+        await fetchTasks(project);
+        navigate(`/projects/${project.id}`);
+    };
+
     return (
         <table>
             <thead>
@@ -15,7 +22,9 @@ const ProjectsList = ({ projects, onSelectProject }) => {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>
-                            <Link to={`/projects/${project.id}`} onSelect={onSelectProject(project)}>View Tasks</Link>
+                            <button onClick={() => handleSelect(project)}>
+                                View Tasks
+                            </button>
                         </td>
                     </tr>
                 ))}
