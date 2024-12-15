@@ -10,6 +10,8 @@ import Pagination from "./components/projects/Pagination";
 import FindModel from './components/shared/FindModal'
 import { HOST } from "./constants/host";
 import { sortTasks } from "./utils/sortTasks";
+import Tasks from "./components/tasks/Tasks";
+import Projects from "./components/projects/Projects";
 
 const App = () => {
   const [projects, setProjects] = useState([]);
@@ -69,46 +71,31 @@ const App = () => {
           <Route
             path="/"
             element={
-              <div>
-                <FindModel setSearchQuery={setSearchProjectsQuery} searchedItem="project" />
-                <ProjectsList
-                  projects={projects}
-                  setProjects={setProjects}
-                  onSelectProject={(project) => setSelectedProject(project)}
-                  fetchTasks={fetchTasks}
-                />
-                <AddProjectModal onAdd={(newProject) => setProjects([...projects, newProject])} />
-                <Pagination
-                  currentPage={currentPage}
-                  totalItems={totalProjects}
-                  pageSize={pageSize}
-                  onPageChange={handlePageChange}
-                />
-              </div>
+              <Projects
+                setSearchProjectsQuery={setSearchProjectsQuery}
+                projects={projects}
+                setProjects={setProjects}
+                fetchTasks={fetchTasks}
+                currentPage={currentPage}
+                totalProjects={totalProjects}
+                pageSize={pageSize}
+                handlePageChange={handlePageChange}
+                setSelectedProject={setSelectedProject}
+              />
             }
           />
 
-          {/* Tasks Page */}
+          {/* Project's tasks Page */}
           <Route
             path="/projects/:projectId"
             element={
-              <div>
-                {selectedProject && (
-                  <>
-                    <h2>Tasks for Project "{selectedProject.name}"</h2>
-                    <FindModel setSearchQuery={setSearchTaskQuery} searchedItem="task" />
-                    <TasksList
-                      tasks={tasks}
-                      onTaskUpdate={setTasks}
-                    />
-                    <AddTaskModal
-                      project={selectedProject}
-                      onAdd={(newTask) => setTasks(sortTasks([...tasks, newTask]))}
-                    />
-                  </>
-                )}
-              </div>
-            }
+              <Tasks
+                selectedProject={selectedProject}
+                setSearchTaskQuery={setSearchTaskQuery}
+                tasks={tasks}
+                setTasks={setTasks}
+                sortTasks={sortTasks}
+              />}
           />
         </Routes>
       </div>
