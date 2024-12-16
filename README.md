@@ -87,7 +87,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - Add tests for both server & client.
 - Show a Project's progress bar on the Projects page as a new column.
 - Add an activity feed showing all changes to a task/project and which user implemented the changes.
-- Improve design
+- Improve design.
 - Add more complex logic for user authentication and authorization.
 
 ## Additional Features (If Implemented)  
