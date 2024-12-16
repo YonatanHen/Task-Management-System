@@ -8,7 +8,10 @@ const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
     const [dependencies, setDependencies] = useState({});
     const [completedTasksCount, setCompletedTasksCount] = useState(tasks.filter(task => task.completed).length)
 
-    const markCompleted = async (taskId) => {
+    const changeTaskStatus = async (taskId) => {
+        /** Changes task staus (completed or uncompleted).
+         * @param {number} taskId the ID of the task that should change it's status 
+         */
         try {
             const response = await axios.patch(`${HOST}/task/${taskId}`, {
                 change_status: true
@@ -30,6 +33,9 @@ const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
 
 
     const deleteTask = async (taskId) => {
+        /** Handles deletion of a task by it's ID
+         * @param {number} taskId the ID of the task that should be deleted.
+         */
         try {
             await axios.delete(`${HOST}/task/${taskId}`);
             onTaskUpdate((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -41,6 +47,10 @@ const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
 
 
     const updateDependency = async (taskId, parentTaskId) => {
+        /** Update task dependency by assigning the task to "parent" task.
+         * @param {number} taskId the ID of the task we want to assign.
+         * @param {number} parent_task_id the ID of the parent task that we want to set as a parent.
+         */
         try {
             if (parentTaskId === null) {
                 parentTaskId = 'None'
@@ -59,6 +69,10 @@ const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
     };
 
     const renderTaskRow = (task, level = 0) => {
+        /** Function renders task row
+         * @param {Object} task an object that includes task's data.
+         * @param {number} level the level of the task in the table, based on his level on its own hirerachy of dependants. 
+         */
         const dependentTasks = tasks.filter((t) => t.parent_task_id === task.id);
 
         return (
@@ -93,7 +107,7 @@ const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
                         </select>
                     </td>
                     <td id="tasks-actions-buttons">
-                        <button onClick={() => markCompleted(task.id)}>
+                        <button onClick={() => changeTaskStatus(task.id)}>
                             Mark {task.completed ? "Uncompleted" : "Completed"}
                         </button>
                         <button onClick={() => deleteTask(task.id)}>Delete</button>

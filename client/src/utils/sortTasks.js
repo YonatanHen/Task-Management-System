@@ -1,6 +1,6 @@
 export const sortTasks = (tasks) => {
     /**
-     * Sort tasks in project by their due date.
+     * Sort tasks in a project by their due date.
      * @param {Array} tasks Array of tasks
      * @return {Array}      Sorted array of tasks by their "due_date" field
      */ 

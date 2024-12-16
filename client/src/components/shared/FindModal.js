@@ -4,6 +4,7 @@ const FindModal = ({ setSearchQuery, searchedItem }) => {
     const [input, setInput] = useState("");
 
     const handleSearch = async () => {
+        /** Handles results once an item is searched based on user input. */
         if (!input.trim()) {
             alert(`Please enter a ${searchedItem} name to search.`);
             setSearchQuery("");
@@ -14,6 +15,7 @@ const FindModal = ({ setSearchQuery, searchedItem }) => {
     };
 
     const handleReset = () => {
+        /** Reset search input */
         setSearchQuery("")
         setInput("")
     }

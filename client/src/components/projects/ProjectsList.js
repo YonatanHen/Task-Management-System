@@ -7,6 +7,10 @@ const ProjectsList = ({ projects, setProjects, onSelectProject, fetchTasks }) =>
     const navigate = useNavigate();
 
     const handleSelect = async (project) => {
+        /**
+         * Handles selections of a project from the list
+         * @param {Object} project a project object. 
+         */
         await onSelectProject(project);
         await fetchTasks(project);
         navigate(`/projects/${project.id}`);

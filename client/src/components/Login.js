@@ -6,6 +6,7 @@ const Login = ({ setUsersList, socket }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        /** Handles socket interactions with the server */
         socket.connect();
 
         socket.on('usersList', (users) => {
@@ -19,6 +20,7 @@ const Login = ({ setUsersList, socket }) => {
     }, []);
 
     const handleLogin = () => {
+        /** handles a login of user */
         if (username.trim() !== '') {
             socket.emit('login', username);
 

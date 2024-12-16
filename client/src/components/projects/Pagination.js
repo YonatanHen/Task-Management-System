@@ -4,12 +4,18 @@ const Pagination = ({ currentPage, totalItems, pageSize, onPageChange }) => {
     const totalPages = Math.ceil(totalItems / pageSize);
 
     const handlePrevious = () => {
+    /**
+    * Handles moving to the previous page functionality.
+    */
         if (currentPage > 1) {
             onPageChange(currentPage - 1);
         }
     };
 
     const handleNext = () => {
+    /**
+    * Handles moving to the next page functionality.
+    */
         if (currentPage < totalPages) {
             onPageChange(currentPage + 1);
         }

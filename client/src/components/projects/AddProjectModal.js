@@ -7,6 +7,9 @@ const AddProjectModal = ({ onAdd }) => {
     const [projectName, setProjectName] = useState("");
 
     const handleSubmit = async () => {
+        /**
+         * Fetch project's tasks based on user input once the submit button clicked.
+         */
         try {
             const respone = await axios.post(
                 `${HOST}/project/`,

@@ -10,12 +10,16 @@ const Tasks = ({ selectedProject, setSearchTaskQuery, tasks, setTasks, sortTasks
     const [tasksCount, setTasksCount] = useState(currentTasks.length)
 
     useEffect(() => {
+        /** navigate to the main page if no project is loaded (by accessing the tasks page path directly). */
         if (!selectedProject) {
             navigate("/");
         }
     }, [selectedProject, navigate]);
 
     const handleAddTask = (newTask) => {
+        /** Render results once a new task is added
+         * @param {Object} task task's object retreived from server.
+         */
         setTasks(sortTasks([...tasks, newTask]))
         setTasksCount(tasksCount + 1)
     }

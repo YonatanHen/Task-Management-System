@@ -11,6 +11,7 @@ const AddTaskModal = ({ project, onAdd }) => {
     const [dueDate, setDueDate] = useState(todayDate);
 
     const handleSubmit = async () => {
+        /** Handles the submission of adding a new task */
         if (!taskName || !dueDate) {
             alert("Task name and due date are required.");
             return;
