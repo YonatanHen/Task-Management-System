@@ -2,10 +2,10 @@
 This web application is designed to assist users in managing their day-to-day tasks efficiently.
 With a user-friendly interface, it enables seamless organization of tasks by projects, prioritization of tasks, creation of subtasks, and setting deadlines. 
 Users can easily add, or remove tasks and projects, empowering them to take control of their daily responsibilities and stay on top of their goals.
-#### Architecture
+### Architecture
 ![evernetix](https://github.com/user-attachments/assets/6a41083f-98d1-4b11-af5a-b0aab1fbb671)
 
-#### ERD
+### ERD
 ![evernetix ERD](https://github.com/user-attachments/assets/077fabf8-f516-454f-92a5-ddd10ed82a24)
 
 ## Tech Stack  
@@ -67,9 +67,6 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
    
    ```npm start```
 
-## Instructions  
-Outline how to use the project, interact with its features, or perform specific tasks.  
-
 ## Implemented Features  
 ### Core Features  
 - Add projects.
@@ -86,7 +83,12 @@ Outline how to use the project, interact with its features, or perform specific 
 - Visual connections between tasks are represented in the tasks list.
 
 ## Future Improvements  
-Highlight potential enhancements or new features that could be added with more time or resources.  
+- Integrate this project with a tasks management system (like Jira) if new collaborators are added to this project.
+- Add tests for both server & client.
+- Show a Project's progress bar on the Projects page as a new column.
+- Add an activity feed showing all changes to a task/project and which user implemented the changes.
+- Improve design
+- Add more complex logic for user authentication and authorization.
 
 ## Additional Features (If Implemented)  
 - Remove projects.
@@ -95,5 +97,5 @@ Highlight potential enhancements or new features that could be added with more t
 - Pagination in project screen, organized 10 projects per page.
 - Reset search results on the projects page.
 - Filter tasks (Find feature) by name (case-insensitive).
-- Task priorities represented by constant colors: low-green, medium-yellow, high-red.
+- Task priorities are represented by constant colors: low-green, medium-yellow, and high-red.
 - Tasks are sorted by their due date not only on the initial rendering of the tasks page but also where new tasks are added.
