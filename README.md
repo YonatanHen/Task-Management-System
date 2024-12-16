@@ -52,7 +52,18 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 
    ```pip install requirements.txt```
   
-5. Run the Flask server:
+5.Create a .env file with the following variables:
+```
+PSQL_USERNAME=<PostgreSQL username>
+PSQL_PASSWORD=<PostgreSQL password>
+PSQL_URL=<PostgreSQL URL, for example: 'localhost:5432/postgres'>
+SENDER_EMAIL_ID=<Email ID, without @gmail.com postfix>
+SENDER_EMAIL_PASSWORD=<Email's password, please refer to Google documentation in case you are using MFA>
+RECIEVER_EMAIL=<Full email address of the receiver (i.e. Alex's email address)>
+CLIENT_URL=<Client URL, default is http://localhost:3000>
+```
+
+6. Run the Flask server:
    
    ```python app.py```
 
@@ -80,7 +91,8 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 
 ### Bonus Features  
 - Allow users to mark tasks as dependent on other tasks.
-- The user receives an email once a new task is added.
+- The user receives an email once a new task is added:
+  ![image](https://github.com/user-attachments/assets/c5d1b46a-97c8-43b7-8cc9-57a66f06faa0)
 - A visual indicator for how many tasks are completed out of the total tasks in the project.
 - Visual connections between tasks are represented in the tasks list.
 
