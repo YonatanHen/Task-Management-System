@@ -32,6 +32,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
+      /**
+       * Fetch all logged-in users.
+       */
       try {
         const response = await fetch(`${HOST}/users`);
         if (response.ok) {
@@ -52,8 +55,10 @@ const App = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Fetch projects
   useEffect(() => {
+    /**
+     * Fetch all projects based on user search input.
+     */
     fetch(`${HOST}/project?${searchProjectsQuery.length > 0 ? `input=${searchProjectsQuery}` : ""}`)
       .then((res) => res.json())
       .then(data => {
@@ -63,6 +68,10 @@ const App = () => {
   }, [currentPage, searchProjectsQuery]);
 
   useEffect(() => {
+    /**
+     * Function update the tasks based on user search.
+     * The functions handles filtering of tasks based on their parent tasks iteratively. 
+     */
     if (searchTasksQuery.trim() === "") {
       setTasks(currentTasks.current);
     } else {
@@ -94,8 +103,10 @@ const App = () => {
     }
   }, [searchTasksQuery]);
 
-  // Fetch tasks for the selected project
   const fetchTasks = async (project) => {
+    /**
+     * Functions fetch task according to the project selected by the user.
+     */
     if (!project) return;
     try {
       const response = await axios.get(`${HOST}/project/${project.id}`);
@@ -105,10 +116,6 @@ const App = () => {
     } catch (error) {
       errorHandler(error);
     }
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
   };
 
   return (
@@ -135,7 +142,7 @@ const App = () => {
               <li key={index} style={{ marginBottom: "8px" }}>{user}</li>
             ))
           ) : (
-            <li>No users logged in</li>
+            <li>N/A</li>
           )}
         </ul>
       </div>
@@ -164,7 +171,7 @@ const App = () => {
                   currentPage={currentPage}
                   totalProjects={totalProjects}
                   pageSize={pageSize}
-                  handlePageChange={handlePageChange}
+                  handlePageChange={(page) => setCurrentPage(page)}
                   setSelectedProject={setSelectedProject}
                 />
               }
