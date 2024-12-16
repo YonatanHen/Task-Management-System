@@ -108,8 +108,8 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - Remove projects.
 - Remove tasks.
 - Mark tasks as uncompleted
-- Pagination in project screen, organized 10 projects per page.
-- Reset search results on the projects page.
+- Pagination on the project screen, organized 10 projects per page.
+- Reset search results on the projects and tasks screens.
 - Filter tasks (Find feature) by name (case-insensitive).
 - Task priorities are represented by constant colors: low-green, medium-yellow, and high-red.
 - Tasks are sorted by their due date not only on the initial rendering of the tasks page but also where new tasks are added.
