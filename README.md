@@ -104,7 +104,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - Improve design.
 - Add more complex logic for user authentication and authorization.
 
-## Additional Features (If Implemented)  
+## Additional Features
 - Remove projects.
 - Remove tasks.
 - Mark tasks as uncompleted
