@@ -60,6 +60,6 @@ table td button {
 
 #tasks-actions-buttons button {
   padding: 10px 15px;
-  font-size: 12px;
-  width: 150px;
+  font-size: 14px;
+  width: 50%;
 }
