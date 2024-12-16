@@ -14,12 +14,14 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 - Axios
 - React-router-DOM
 - Bootstrap & CSS
+- SocketIO
 
 #### Backend (Python):
 - Flask
 - SQLAlchemy
 - CORS
 - smtplib
+- SocketIO
 
 #### DB:
 - PostgreSQL
