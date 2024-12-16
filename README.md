@@ -30,7 +30,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 
 ## How to Run the Project  
 #### DB:
-1. Make sure Docker + Docker Desktop installed on your machine.
+1. Make sure Docker CLI + Docker Desktop installed on your machine.
 2. Create a Docker volume by running the following command:
    
    ```docker volume create evernetix_task_vol```
