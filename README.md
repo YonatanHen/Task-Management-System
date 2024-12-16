@@ -2,6 +2,11 @@
 This web application is designed to assist users in managing their day-to-day tasks efficiently.
 With a user-friendly interface, it enables seamless organization of tasks by projects, prioritization of tasks, creation of subtasks, and setting deadlines. 
 Users can easily add, or remove tasks and projects, empowering them to take control of their daily responsibilities and stay on top of their goals.
+#### Architecture
+![evernetix](https://github.com/user-attachments/assets/6a41083f-98d1-4b11-af5a-b0aab1fbb671)
+
+#### ERD
+![evernetix ERD](https://github.com/user-attachments/assets/077fabf8-f516-454f-92a5-ddd10ed82a24)
 
 ## Tech Stack  
 #### Frontend (JavaScript):
