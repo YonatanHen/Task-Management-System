@@ -5,7 +5,7 @@ from utils.constants import DATE_FORMAT
 from utils.send_email import send_email
 
 
-def create_task(name: str, due_date: date, priority: int, pid: int, tid: int) -> dict:
+def create_task(name: str, due_date: date, priority: int, pid: int) -> dict:
     """
     This function creates a new task in the DB.
     
@@ -14,7 +14,6 @@ def create_task(name: str, due_date: date, priority: int, pid: int, tid: int) ->
         due_date (date): date to finish the task
         priority (int): a number between 1-3 indicates the priority of the task.
         pid (int): the project's ID associated with the task. 
-        tid (int): the parent task ID associated with the task.
     Raises:
         KeyError: _description_
         ValueError: _description_

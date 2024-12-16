@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 import { priorities } from "../../constants/priorities";
 import { HOST } from "../../constants/host";
+import errorHandler from "../../utils/errorHandler";
 
 const AddTaskModal = ({ project, onAdd }) => {
     const todayDate = new Date().toISOString().split("T")[0]
@@ -20,7 +21,7 @@ const AddTaskModal = ({ project, onAdd }) => {
                 `${HOST}/task/`,
                 {
                     name: taskName,
-                    priority,
+                    priority: priority || 1,
                     project_id: project.id,
                     due_date: dueDate,
                 },
@@ -34,7 +35,7 @@ const AddTaskModal = ({ project, onAdd }) => {
             setPriority(priorities.Low);
             setDueDate(new Date().toISOString().split("T")[0]);
         } catch (error) {
-            alert(error.message)
+            errorHandler(error);
         }
     };
 

@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { priorities, prioritiesColors } from "../../constants/priorities";
 import { HOST } from "../../constants/host";
+import errorHandler from "../../utils/errorHandler";
 
-const TasksList = ({ tasks, onTaskUpdate }) => {
+const TasksList = ({ tasks, onTaskUpdate, tasksCount, setTasksCount }) => {
     const [dependencies, setDependencies] = useState({});
-    const [completedTasksCount, setTasksCount] = useState(tasks.filter(task => task.completed).length)
+    const [completedTasksCount, setCompletedTasksCount] = useState(tasks.filter(task => task.completed).length)
 
     const markCompleted = async (taskId) => {
         try {
@@ -17,13 +18,13 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
 
             const value = await updatedTask.completed ? 1 : -1;
 
-            setTasksCount(completedTasksCount + value);
+            setCompletedTasksCount(completedTasksCount + value);
 
             onTaskUpdate((prevTasks) =>
                 prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
             );
         } catch (error) {
-            alert(error.response);
+            errorHandler(error);
         }
     };
 
@@ -32,8 +33,9 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
         try {
             await axios.delete(`${HOST}/task/${taskId}`);
             onTaskUpdate((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
+            setTasksCount(tasksCount-1)
         } catch (error) {
-            alert(error.message);
+            errorHandler(error);
         }
     };
 
@@ -52,7 +54,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                 prevTasks.map((task) => (task.id === taskId ? updatedTask : task))
             );
         } catch (error) {
-            alert(error.response?.data?.error || "An error occurred");
+            errorHandler(error);
         }
     };
 
@@ -121,7 +123,7 @@ const TasksList = ({ tasks, onTaskUpdate }) => {
                     .filter((task) => !task.parent_task_id)
                     .map((task) => renderTaskRow(task))}
             </tbody>
-            <label style={{ fontWeight: "bold", marginTop: 10, fontSize: 20 }}>Completed Tasks: {completedTasksCount}/{tasks.length}</label>
+            <label style={{ fontWeight: "bold", marginTop: 10, fontSize: 20 }}>Completed Tasks: {completedTasksCount}/{tasksCount}</label>
         </table>
     );
 };

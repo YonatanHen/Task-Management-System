@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { HOST } from "../../constants/host";
+import errorHandler from "../../utils/errorHandler";
 
 const ProjectsList = ({ projects, setProjects, onSelectProject, fetchTasks }) => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ const ProjectsList = ({ projects, setProjects, onSelectProject, fetchTasks }) =>
             await axios.delete(`${HOST}/project/${projectId}`)
             setProjects((prevProjects) => prevProjects.filter((project) => project.id !== projectId));
         } catch (error) {
-            alert(error.message);
+            errorHandler(error);
         }
     };
 

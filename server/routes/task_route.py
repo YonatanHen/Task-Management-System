@@ -15,9 +15,8 @@ def create_task_api():
             due_date = payload.get('due_date')
             priority = payload.get('priority')
             pid = payload.get('project_id')
-            tid = payload.get('task_id')
             
-            task = create_task(task_name, due_date, priority, pid, tid)
+            task = create_task(task_name, due_date, priority, pid)
             
             return jsonify({ "message": "Task added successfully", "task": task })
             

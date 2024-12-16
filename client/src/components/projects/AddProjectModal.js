@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { HOST } from "../../constants/host";
+import errorHandler from "../../utils/errorHandler";
 
 const AddProjectModal = ({ onAdd }) => {
     const [projectName, setProjectName] = useState("");
@@ -20,11 +21,7 @@ const AddProjectModal = ({ onAdd }) => {
             const newProject = respone.data
             onAdd(newProject)
         } catch (error) {
-            if (error.name === 'AxiosError') {
-                alert(error.response.data)
-            } else {
-                alert(error.message);
-            }
+            errorHandler(error);
         }
     };
 

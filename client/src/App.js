@@ -8,6 +8,7 @@ import Tasks from "./components/tasks/Tasks";
 import Projects from "./components/projects/Projects";
 import Login from "./components/Login";
 import { socket } from "./utils/socket";
+import errorHandler from "./utils/errorHandler";
 
 const App = () => {
   const [usersList, setUsersList] = useState([])
@@ -40,7 +41,7 @@ const App = () => {
           console.error('Failed to fetch users');
         }
       } catch (error) {
-        console.error('Error fetching users:', error);
+        errorHandler(error);
       }
     };
 
@@ -102,7 +103,7 @@ const App = () => {
       setTasks(tasks);
       currentTasks.current = tasks;
     } catch (error) {
-      alert("Failed to fetch tasks:", error);
+      errorHandler(error);
     }
   };
 
@@ -177,6 +178,7 @@ const App = () => {
                   tasks={tasks}
                   setTasks={setTasks}
                   sortTasks={sortTasks}
+                  currentTasks={currentTasks.current}
                 />
               }
             />
