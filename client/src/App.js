@@ -31,17 +31,17 @@ const App = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
-        try {
-            const response = await fetch(`${HOST}/users`);
-            if (response.ok) {
-                const data = await response.json();
-                setUsersList(data);
-            } else {
-                console.error('Failed to fetch users');
-            }
-        } catch (error) {
-            console.error('Error fetching users:', error);
+      try {
+        const response = await fetch(`${HOST}/users`);
+        if (response.ok) {
+          const data = await response.json();
+          setUsersList(data);
+        } else {
+          console.error('Failed to fetch users');
         }
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
     };
 
     // Fetch users every 5 seconds
@@ -49,7 +49,7 @@ const App = () => {
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-}, []);
+  }, []);
 
   // Fetch projects
   useEffect(() => {
@@ -65,10 +65,30 @@ const App = () => {
     if (searchTasksQuery.trim() === "") {
       setTasks(currentTasks.current);
     } else {
+      const searchTasksQueryLowerCase = searchTasksQuery.toLowerCase();
+
       setTasks(
-        currentTasks.current.filter((task) =>
-          task.name.toLowerCase().includes(searchTasksQuery.toLowerCase())
-        )
+        currentTasks.current.filter((task) => {
+          let rootTask = task;
+          while (rootTask.parent_task) {
+            rootTask = rootTask.parent_task;
+          }
+
+          const stack = [rootTask];
+          while (stack.length > 0) {
+            const currentTask = stack.pop();
+
+            if (currentTask.name.toLowerCase().includes(searchTasksQueryLowerCase)) {
+              return true;
+            }
+
+            if (currentTask.dependent_tasks && currentTask.dependent_tasks.length > 0) {
+              stack.push(...currentTask.dependent_tasks);
+            }
+          }
+
+          return false;
+        })
       );
     }
   }, [searchTasksQuery]);
