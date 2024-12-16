@@ -85,7 +85,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 ## Future Improvements  
 - Integrate this project with a tasks management system (like Jira) if new collaborators are added to this project.
 - Add tests for both server & client.
-- Show a Project's progress bar on the Projects page as a new column.
+- Show a Project's progress bar for each project on the Projects screen (and not only on the Tasks screen).
 - Add an activity feed showing all changes to a task/project and which user implemented the changes.
 - Improve design.
 - Add more complex logic for user authentication and authorization.
