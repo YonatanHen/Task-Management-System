@@ -53,15 +53,15 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
    ```pip install requirements.txt```
   
 5.Create a .env file with the following variables:
-```
-PSQL_USERNAME=<PostgreSQL username>
-PSQL_PASSWORD=<PostgreSQL password>
-PSQL_URL=<PostgreSQL URL, for example: 'localhost:5432/postgres'>
-SENDER_EMAIL_ID=<Email ID, without @gmail.com postfix>
-SENDER_EMAIL_PASSWORD=<Email's password, please refer to Google documentation in case you are using MFA>
-RECIEVER_EMAIL=<Full email address of the receiver (i.e. Alex's email address)>
-CLIENT_URL=<Client URL, default is http://localhost:3000>
-```
+   ```
+   PSQL_USERNAME=<PostgreSQL username>
+   PSQL_PASSWORD=<PostgreSQL password>
+   PSQL_URL=<PostgreSQL URL, for example: 'localhost:5432/postgres'>
+   SENDER_EMAIL_ID=<Email ID, without @gmail.com postfix>
+   SENDER_EMAIL_PASSWORD=<Email's password, please refer to Google documentation in case you are using MFA>
+   RECIEVER_EMAIL=<Full email address of the receiver (i.e. Alex's email address)>
+   CLIENT_URL=<Client URL, default is http://localhost:3000>
+   ```
 
 6. Run the Flask server:
    
