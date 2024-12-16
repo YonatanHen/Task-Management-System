@@ -52,7 +52,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
 
    ```pip install requirements.txt```
   
-5.Create a .env file with the following variables:
+5. Create a .env file with the following variables:
    ```
    PSQL_USERNAME=<PostgreSQL username>
    PSQL_PASSWORD=<PostgreSQL password>
@@ -63,7 +63,7 @@ Users can easily add, or remove tasks and projects, empowering them to take cont
    CLIENT_URL=<Client URL, default is http://localhost:3000>
    ```
 
-6. Run the Flask server:
+7. Run the Flask server:
    
    ```python app.py```
 
